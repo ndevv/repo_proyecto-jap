@@ -7,41 +7,69 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/pro
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
-var showSpinner = function(){
+var showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
 }
 
-var hideSpinner = function(){
+var hideSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-var getJSONData = function(url){
-    var result = {};
-    showSpinner();
-    return fetch(url)
+var getJSONData = function (url) {
+  var result = {};
+  showSpinner();
+  return fetch(url)
     .then(response => {
       if (response.ok) {
         return response.json();
-      }else{
+      } else {
         throw Error(response.statusText);
       }
     })
-    .then(function(response) {
-          result.status = 'ok';
-          result.data = response;
-          hideSpinner();
-          return result;
+    .then(function (response) {
+      result.status = 'ok';
+      result.data = response;
+      hideSpinner();
+      return result;
     })
-    .catch(function(error) {
-        result.status = 'error';
-        result.data = error;
-        hideSpinner();
-        return result;
+    .catch(function (error) {
+      result.status = 'error';
+      result.data = error;
+      hideSpinner();
+      return result;
     });
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  let userLogged = localStorage.getItem('User-Logged');
+  let infoUser = document.getElementById("info-user");
+  let user = document.getElementById("user");
+
+  if (userLogged) {
+    userLogged = JSON.parse(userLogged);
+    user.innerText = user.innerText + 'Usuario: ' + userLogged.email;
+    infoUser.style = "display: inline-block";
+  }
+
+  //document.getElementById("salir").addEventListener("click", function () {
+  //localStorage.removeItem('User-Logged');
+  //window.location = 'login.html';
+  //}) (activar cuando agregue el botón "salir")
 });
+
+//---------------------------------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function (e) {
+  let userLoggedG = localStorage.getItem('Email');
+  let infoG = document.getElementById('info-google-user');
+  let userG = document.getElementById('user-google');
+
+  if (localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null) {
+    userG.innerText = userG.innerText + 'Usuario: ' + userLoggedG;
+    infoG.style = "display: inline-block";
+  }
+});
+//---------------------------------------------------------------------------------------------------

@@ -143,3 +143,13 @@ a.custom-card:hover {
 .invalid {
   background-color: red;
 }
+
+#info-user {
+  color: whitesmoke;
+  padding-top: .5rem;
+}
+
+#info-google-user {
+  color: whitesmoke;
+  padding-top: .5rem;
+}

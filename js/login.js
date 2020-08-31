@@ -19,21 +19,24 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
 
         if (camposCompletos) {
+            localStorage.setItem('User-Logged', JSON.stringify({ email: inputEmail.value }));
             window.location = 'index2.html';
         }
     });
 
 });
 
+
 function onSignIn(googleUser) {
 
     var profile = googleUser.getBasicProfile();
     //var id_token = googleUser.getAuthResponse().id_token;
-    localStorage.setItem('Name',profile.getName());
+    localStorage.setItem('Name', profile.getName());
 
-    if(localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null){
-        localStorage.setItem('Name',profile.getGivenName());
-        localStorage.setItem('Email',profile.getEmail());
-        window.location.href="index2.html";
-    }  
+    if (localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null) {
+        localStorage.setItem('Name', profile.getGivenName());
+        localStorage.setItem('Email', profile.getEmail());
+
+        window.location.href = "index2.html";
+    }
 }
