@@ -8,7 +8,9 @@
   <meta name="description" content="">
   <meta name="google-signin-client_id" content="133674766828-hiku46ai9d0h67vkvm6j1earo52fmeia.apps.googleusercontent.com">
   <title>eMercado - Todo lo que busques está aquí</title>
-
+  <!---------------------------------------------------------------------------->
+  <link rel="shortcut icon" type="image/x-icon" href="img/Shopping-bag.ico">
+  <!---------------------------------------------------------------------------->
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <!-- Bootstrap core CSS -->
@@ -27,7 +29,7 @@
       align-items: center;
       padding-top: 40px;
       padding-bottom: 40px;
-      background-color: #f5f5f5;
+      background-image: url("img/background.png");
     }
 
     .signin {
@@ -43,7 +45,6 @@
       padding: 15px;
       margin: auto;
     }
-    
   </style>
 </head>
 
@@ -51,16 +52,16 @@
   <div class="container p-5">
     <img src="img/login.png" alt="logo" width="300" />
 
-    <h1>Inicio de sesión</h1>
+    <h1 style="color: white;">Inicio de sesión</h1>
     <div>
-      <label for="inputEmail"> <strong>Email:</strong> </label> <br>
+      <label for="inputEmail"> <strong style="color: white;">Email:</strong> </label> <br>
       <input type="email" id="inputEmail" placeholder="Tu correo electrónico" required> <br><br>
     </div>
     <div>
-      <label for="inputPassword"> <strong>Contraseña:</strong> </label> <br>
+      <label for="inputPassword"> <strong style="color: white;">Contraseña:</strong> </label> <br>
       <input type="password" id="inputPassword" placeholder="Tu contraseña" required> <br><br>
     </div>
-    <button id="submitBtn"> <strong>Ingresar</strong> </button>
+    <button id="submitBtn" class="btn btn-primary btn-lg"> <strong>Ingresar</strong> </button>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
   </div>
