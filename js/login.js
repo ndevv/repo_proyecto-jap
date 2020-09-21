@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
         if (camposCompletos) {
             localStorage.setItem('User-Logged', JSON.stringify({ email: inputEmail.value }));
             window.location = 'index2.html';
-            notificar();
         } else {
             alert("Debes rellenar ambos campos")
             onclick = inputEmail.classList.remove("invalid");
@@ -40,39 +39,7 @@ function onSignIn(googleUser) {
 
     if (localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null) {
         localStorage.setItem('Name', profile.getGivenName());
-        localStorage.setItem('Email', profile.getEmail());
-//-------------------
-        notificar();
-//-------------------        
+        localStorage.setItem('Email', profile.getEmail());     
         window.location.href = "index2.html";
     }
 };
-//---------------------------------------------------------------------------------------------------------
-function notificar() {
-    if (Notification.permission !== "granted") {
-        Notification.requestPermission();
-    } else {
-
-        if (localStorage.getItem('User-Logged')) {
-
-            new Notification("¡Bienvenido!",
-                {
-                    icon: "img/notificationicon.png",
-                    body: JSON.parse(localStorage.getItem('User-Logged')).email
-                }
-            );
-        } else {
-
-            if (localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null) {
-
-                new Notification("¡Bienvenido!",
-                    {
-                        icon: "img/notificationicon.png",
-                        body: localStorage.getItem('Email')
-                    }
-                )
-            };
-        }
-    }
-};
-//----------------------------------------------------------------------------------------------------------

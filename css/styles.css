@@ -153,3 +153,31 @@ a.custom-card:hover {
   color: whitesmoke;
   padding-top: .5rem;
 }
+
+#img1,
+#img2,
+#img3,
+#img4,
+#img5 {
+  height: 350px;
+  width: 600px;
+  display: block;
+  margin: auto;
+}
+
+.dropdown-menu {
+  background-color: #117a8b;
+}
+
+.dropdown-menu a.dropdown-item {
+  color:white;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: #5dbcd2;
+  border-color: white;
+}
+
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle {
+  border-color: #5dbcd2
+}

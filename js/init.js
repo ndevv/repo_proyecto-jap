@@ -52,16 +52,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
   if (userLogged) {
     userLogged = JSON.parse(userLogged);
     user.innerText = user.innerText + 'Usuario: ' + userLogged.email;
-    infoUser.style = "display: inline-block";
+    //----------------------------------------
+    infoUser.style = "visibility: visible";
+    //----------------------------------------
   }
-
-  //document.getElementById("salir").addEventListener("click", function () {
-  //localStorage.removeItem('User-Logged');
-  //window.location = 'login.html';
-  //}) (activar cuando agregue el botón "salir")
+  //---------------------------------------------------------------------------
+  document.getElementById("salir").addEventListener("click", function () {
+    localStorage.removeItem('User-Logged');
+    //window.location = 'index.html';
+  })
+  //---------------------------------------------------------------------------  
 });
 
-//---------------------------------------------------------------------------------------------------
+
 document.addEventListener("DOMContentLoaded", function (e) {
   let userLoggedG = localStorage.getItem('Email');
   let infoG = document.getElementById('info-google-user');
@@ -69,7 +72,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
   if (localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null) {
     userG.innerText = userG.innerText + 'Usuario: ' + userLoggedG;
-    infoG.style = "display: inline-block";
+    //-------------------------------------
+    infoG.style = "visibility: visible";
+    //-------------------------------------
   }
+  //document.getElementById("salir").addEventListener("click", function () {
+    //alert("prueba");
+    //window.location = 'index.html';
+    
+  //})
+
 });
-//---------------------------------------------------------------------------------------------------

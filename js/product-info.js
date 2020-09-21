@@ -1,11 +1,33 @@
-//----------------------------------------------------------
 var productArray = [];
 var commentsArray = [];
+//----------------------
+var productsArray = [];
 
+function showRelatedProducts() {
+    let content = '<hr>';
+
+    productArray.relatedProducts.forEach(function (i) {
+        content += `
+                <a href="product-info.html" class="d-flex list-group-item justify-content-center list-group-item-action">
+                    <div class="col-1">
+                        <img src="${productsArray[i].imgSrc}" alt="${productsArray[i].description}" class="img-thumbnail">
+                    </div>
+                    <div>
+                        <h4 class="mb-1 text-center">${productsArray[i].name}<h4>
+                            <p class="text-center">${productsArray[i].cost}${productsArray[i].currency}</p>
+                    </div>
+                </a>            
+                `
+    });
+
+    document.getElementById("relatedProducts").innerHTML = content;
+
+}
+//-----------------------------------------------------------------------------------------------------------------------------
 function showProductInfo() {
 
     let info = "";
-    let imgs = "";
+    //let imgs = "";
     let comments = "<hr>";
 
     info += `      
@@ -17,14 +39,14 @@ function showProductInfo() {
                     
                 `;
 
-    imgs += `   
-                <img class="img" src="${productArray.images[0]}" width="185px" height="150px" alt="">
-                <img class="img" src="${productArray.images[1]}" width="185px" height="150px" alt="">
-                <img class="img" src="${productArray.images[2]}" width="185px" height="150px" alt="">
-                <img class="img" src="${productArray.images[3]}" width="185px" height="150px" alt="">
-                <img class="img" src="${productArray.images[4]}" width="185px" height="150px" alt="">
+    //imgs += `   
+                //<img class="img" src="${productArray.images[0]}" width="185px" height="150px" alt="">
+                //<img class="img" src="${productArray.images[1]}" width="185px" height="150px" alt="">
+                //<img class="img" src="${productArray.images[2]}" width="185px" height="150px" alt="">
+                //<img class="img" src="${productArray.images[3]}" width="185px" height="150px" alt="">
+                //<img class="img" src="${productArray.images[4]}" width="185px" height="150px" alt="">
                 
-                `;
+                //`;
 
     commentsArray.forEach(function (comment) {
         let puntaje = "";
@@ -48,17 +70,25 @@ function showProductInfo() {
     });
 
     document.getElementById("contenido").innerHTML = info;
-    document.getElementById("imagenes").innerHTML = imgs;
+    //document.getElementById("imagenes").innerHTML = imgs;
+
+    //----------------------carousel---------------------------------------
+    document.getElementById("img1").src = productArray.images[0]; 
+    document.getElementById("img2").src = productArray.images[1]; 
+    document.getElementById("img3").src = productArray.images[2]; 
+    document.getElementById("img4").src = productArray.images[3]; 
+    document.getElementById("img5").src = productArray.images[4]; 
+    //---------------------------------------------------------------------
+
     document.getElementById("comentarios").innerHTML = comments;
 
 };
-//--------------------------------------------------------------------------------
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    //---------------------------------------------------------------------------------------------------------------------------------------
+    
     let userLogged = localStorage.getItem('User-Logged');
     let userLoggedG = (localStorage.getItem('Name') != undefined || sessionStorage.getItem('Name') != null); //(usuario logeado con google)
 
@@ -80,7 +110,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
 
     });
-
+//---------------------------------------------------------------------------------------------
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            productsArray = resultObj.data;
+            showRelatedProducts(productsArray, productArray.relatedProducts);
+        }
+    });
+//---------------------------------------------------------------------------------------------
     document.getElementById("enviarComm").addEventListener("click", function () {
         let inputComment = document.getElementById("newComm");
         let today = new Date();
@@ -115,4 +152,3 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 
 });
-//-----------------------------------------------------------------------------------------------
