@@ -8,11 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
-  
+
   <link rel="shortcut icon" type="image/x-icon" href="img/Shopping-bag.ico">
-  
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
 
   <style>
     .bd-placeholder-img {
@@ -42,7 +43,7 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      
+
       <!----------------------------------------------------------------------------------------------------------------->
       <div class="dropdown" id="info-user" style="visibility: hidden;">
         <button id="user" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -67,12 +68,75 @@
       <!---------------------------------------------------------------------------------------------------------------->
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 11/10/2020) y Entrega 6 (Fecha de entrega: 25/10/2020).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <!------------------------------CARRITO con Bootstrap------------------------->
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <h1>Productos en el carrito:</h1>
+      <p id="carrito"></p>
+    </div>
+  <!------------------------------ENVÍO con Bootstrap---------------------------------------->  
+    <div class="col-sm-4">
+      <h1>Envío:</h1>
+      <div class="card border-dark mb-3" style="max-width: 22rem;">
+        
+        <div class="card-body text-dark">
+          <div class="btn-group btn-group-toggle" data-toggle="">  
+            <div class="btn btn-secondary btn-sm custom-control custom-radio">
+              <input type="radio" id="customRadio1" name="envioCustomRadio" class="custom-control-input" value="5" required checked>
+              <label class="custom-control-label" for="customRadio1">Estandar (5%)</label>
+            </div>
+            <div class="btn btn-secondary btn-sm custom-control custom-radio">
+              <input type="radio" id="customRadio2" name="envioCustomRadio" class="custom-control-input" value="10" required>
+              <label class="custom-control-label" for="customRadio2">Especial (10%)</label>
+            </div>
+            <div class="btn btn-secondary btn-sm custom-control custom-radio">
+              <input type="radio" id="customRadio3" name="envioCustomRadio" class="custom-control-input" value="15" required>
+              <label class="custom-control-label" for="customRadio3">Premium (15%)</label>
+            </div>
+          </div>
+        </div>  
+        
+      </div>
+      <!-------------------------------TOTAL con Bootstrap------------------------------------------------->
+      <h1>Total:</h1>
+      <div class="card border-dark mb-3" style="max-width: 24rem;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Productos:</p>
+                </div>    
+                <div class="col-sm-4">
+                    <p id="total"></p>
+                </div>
+                <div class="col-sm-4">
+                    <p>USD</p>
+                </div>
+                <div class="col-sm-4">
+                    <p>Envío:</p>
+                </div>    
+                <div class="col-sm-4">
+                    <p id="costoEnvio"></p>
+                </div>
+                <div class="col-sm-4">
+                    <p>USD</p>
+                </div>        
+            </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-sm-4">
+                <strong><p>Total:</p></strong>
+              </div>    
+              <div class="col-sm-4">
+                <strong><p id="totalEnvio"></p></strong>
+              </div>
+              <div class="col-sm-4">
+                <strong><p>USD</p></strong>
+              </div>
+            </div>  
+          </div>
+        </div>    
+            <a href="#" class="btn btn-dark btn-block btn-lg">Confirmar compra</a>
+        </div>
     </div>
   </div>
   <div id="spinner-wrapper">
