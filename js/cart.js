@@ -5,9 +5,13 @@ function calcTotal(){
     let total = 0;
     let subs = document.getElementsByClassName("subtotal");
     for (let i = 0; i < subs.length; i++){
-        total += parseInt(subs[i].innerHTML);
+        total += parseFloat(subs[i].innerHTML);
     }
     document.getElementById("total").innerHTML = total;
+    //---------------------------------------------------total-en-pesos-----//
+    document.getElementById("totalEnPesos").innerHTML = total*40;
+
+    //----------------------------------------------------------------------//
     calcEnvio();
 }
 
@@ -17,6 +21,9 @@ function calcSubtotal(unitCost, i){
     let count = parseInt(document.getElementById(`cantidad${i}`).value);
     subtotal = count * unitCost;    
     document.getElementById(`productSubtotal${i}`).innerHTML = subtotal;
+    //--------------------------------------------------------------------subtotal-en-pesos//
+    document.getElementById(`productSubtotalPesos${i}`).innerHTML = subtotal*40;
+    //-------------------------------------------------------------------------------------//
     calcTotal();
 }
 
@@ -35,13 +42,14 @@ function showProducts(array) {
         }
 
         let sub = product.unitCost * product.count;
+        let enPesos = parseInt(sub*40);
 
 
         content += `
         <div class="card mb-3 card border-dark mb-3" style="max-width: 540px;">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="${product.src}" class="card-img" alt="..." style="height: 200px;";>
+                    <img src="${product.src}" class="card-img" alt="..." style="height: 180px; margin-top:39%;">
                 </div>
                 <div class="col-md-8">
                     <div class="card-header">
@@ -55,12 +63,15 @@ function showProducts(array) {
                     <div class="row" style="margin-left:1%;">
                             <div class="col-sm-4">
                                 <p>Subtotal</p>
+                                <p>Subtotal</p>
                             </div>    
                             <div class="col-sm-4">
                                 <p class="subtotal" id="productSubtotal${i}">${sub}</p>
+                                <p class="subtotalOpuesto" id="productSubtotalPesos${i}">${enPesos}</p>
                             </div>
                             <div class="col-sm-4">
                                 <p class"currency">${product.currency}</p>
+                                <p class"">UYU</p>
                             </div>
                     </div>
                 </div>
@@ -92,9 +103,24 @@ function calcEnvio(){
         ${totalConEnvio}
     `
 
-    document.getElementById("costoEnvio").innerHTML = parseInt(total*envio/100);
-    document.getElementById("totalEnvio").innerHTML = parseInt(contenido);
+    document.getElementById("costoEnvio").innerHTML = parseFloat(total*envio/100);
+    document.getElementById("totalEnvio").innerHTML = parseFloat(contenido);
+    //---------------------------------------------------------------------envío-en-pesos--//
+    document.getElementById("costoEnvioPesos").innerHTML = parseFloat(total*envio/100)*40;
+    document.getElementById("totalEnvioPesos").innerHTML = parseFloat(contenido)*40;
+
+    //-------------------------------------------------------------------------------------//
     
+}
+
+function pagoUYU(){
+    document.getElementById("enUYU").style = "display: inline-block";
+    document.getElementById("enUSD").style = "display: none";
+}
+
+function pagoUSD(){
+    document.getElementById("enUSD").style = "display: inline-block";
+    document.getElementById("enUYU").style = "display: none";
 }
 
 
@@ -103,26 +129,26 @@ function calcEnvio(){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     //---------------------------------------------------------------------//
-    getJSONData(CART_INFO_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            carritoArray = resultObj.data.articles;
+        getJSONData(CART_INFO_URL).then(function (resultObj) {
+            if (resultObj.status === "ok") {
+                carritoArray = resultObj.data.articles;
 
-            
-            showProducts(carritoArray);
+                
+                showProducts(carritoArray);
 
-            
-            calcEnvio();
 
-        }
-    });
+                calcEnvio();
 
-    let elements = document.getElementsByName("envioCustomRadio");
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].addEventListener("change", function(){
-            calcEnvio()
+                
+
+            }
         });
-    }
 
-    
+        let elements = document.getElementsByName("envioCustomRadio");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("change", function(){
+                calcEnvio()
+            });
+        }
     //---------------------------------------------------------------------//
 });
