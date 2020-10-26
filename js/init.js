@@ -85,3 +85,62 @@ document.addEventListener("DOMContentLoaded", function (e) {
   //})
 
 });
+
+function loginRequired() {
+
+  let modal = `
+                                                    <!--<div class="alert alert-danger" role="alert" style="width:30%;">
+                                                      <h5>Para ver esta página debes <a href="#" class="alert-link" data-toggle="modal" data-target="#loginModal">iniciar sesión</a></h5>
+                                                    </div>-->
+  
+                <div class="modal fade text-center" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <h3 class="modal-title" id="exampleModalLabel">Debes iniciar sesión</h3>
+                      </div>
+                      <div class="modal-body">
+                        <form id="loginM" class="needs-validation" novalidate>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Email:</label>
+                            <input type="email" class="form-control" id="emailModal" aria-describedby="emailHelp" placeholder="Tu correo electrónico" required>
+                            <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Contraseña:</label>
+                            <input type="password" class="form-control" id="passwordModal" placeholder="Tu contraseña" required>
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+                          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        </form>
+                      </div>
+                                                        <!--<div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>-->
+                    </div>
+                  </div>
+                </div>
+                `;
+                document.body.innerHTML = modal;
+                $('#loginModal').modal({
+                  backdrop: 'static',
+                  keyboard: false
+                });
+                $('#loginModal').modal('show');
+
+                let form = document.getElementById('loginM');
+                form.addEventListener('submit', function (e) {
+                    if (form.checkValidity() === false) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    let email = document.getElementById("emailModal");
+                    let password = document.getElementById("passwordModal");
+                    if(email.value !== '' && password.value !== '') {
+                      localStorage.setItem('User-Logged', JSON.stringify({ email: email.value }));
+                    }
+                    form.classList.add('was-validated');
+                });
+                
+}

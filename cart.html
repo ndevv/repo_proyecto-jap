@@ -13,6 +13,7 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  
 
 
   <style>
@@ -30,6 +31,10 @@
         font-size: 3.5rem;
       }
     }
+
+  body {
+      background-image: url("img/email-pattern.png");
+    }  
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -98,8 +103,8 @@
       <h1>Productos en el carrito:</h1>
       <p id="carrito"></p>
     </div>
-  <!------------------------------ENVÍO con Bootstrap---------------------------------------->  
-    <div class="col-sm-4">
+    <!------------------------------ENVÍO con Bootstrap---------------------------------------->  
+    <div id="envioTotal" class="col-sm-4">
       <h1>Envío:</h1>
       <div class="card border-dark mb-3" style="max-width: 22rem;">
         
@@ -107,17 +112,30 @@
           <div class="btn-group btn-group-toggle" data-toggle="">  
             <div class="btn btn-secondary btn-sm custom-control custom-radio">
               <input type="radio" id="customRadio1" name="envioCustomRadio" class="custom-control-input" value="5" required checked>
-              <label class="custom-control-label" for="customRadio1">Estandar (5%)</label>
+              <label class="custom-control-label" for="customRadio1">Standard (5%)</label>
             </div>
             <div class="btn btn-secondary btn-sm custom-control custom-radio">
-              <input type="radio" id="customRadio2" name="envioCustomRadio" class="custom-control-input" value="10" required>
-              <label class="custom-control-label" for="customRadio2">Especial (10%)</label>
+              <input type="radio" id="customRadio2" name="envioCustomRadio" class="custom-control-input" value="7" required>
+              <label class="custom-control-label" for="customRadio2">Express (7%)</label>
             </div>
             <div class="btn btn-secondary btn-sm custom-control custom-radio">
               <input type="radio" id="customRadio3" name="envioCustomRadio" class="custom-control-input" value="15" required>
               <label class="custom-control-label" for="customRadio3">Premium (15%)</label>
             </div>
-          </div>
+          </div><br><br>
+          
+            <input class="form-control" type="text" id="pais" placeholder="País" value="" required><br>
+            <input class="form-control" type="text" id="ciudad" placeholder="Ciudad" value="" required><br>
+            <input class="form-control" type="text" id="calle" placeholder="Calle" value="" required><br>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" id="nPuerta" class="form-control" placeholder="N° de puerta" value="" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" id="cPostal" class="form-control" placeholder="Código postal" value="" required>
+              </div>
+            </div>  
+            
         </div>  
         
       </div>
@@ -208,8 +226,124 @@
         </div>
       </div> 
       <!------------------------------------------------------------------------------------>
-      <a href="#" class="btn btn-dark btn-block btn-lg">Confirmar compra</a>
+      <button id="metodoDePagoBtn" class="btn btn-secondary btn-block btn-lg" data-toggle="modal" data-target="">Seleccionar forma de pago</button>
     </div>
+    <!-------------------------------------------------------------MODAL---------------------------------------------------------------->
+    <div class="modal fade" id="modalPagar" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <div class="col-sm-12 d-flex justify-content-center">
+              <h4 id="modalUSD" class="modal-title text-center" style="display: block;">Pagar <span id="totalEnvioModal"></span> USD </h4>
+              <h4 id= "modalUYU" class="modal-title text-center" style="display: none;">Pagar <span id="totalEnvioPesosModal"></span> UYU </h4>
+            </div>
+
+          </div>
+          <div class="modal-body">
+              
+            <div class="custom-control custom-switch custom-control-inline">
+              <input type="radio" id="customRadioInline1" name="pago" class="custom-control-input" value="1" checked required>
+              <label class="custom-control-label" for="customRadioInline1">Tarjeta</label>
+            </div>
+            <div class="custom-control custom-switch custom-control-inline">
+              <input type="radio" id="customRadioInline2" name="pago" class="custom-control-input" value="2" required>
+              <label class="custom-control-label" for="customRadioInline2">Transferencia Bancaria</label>
+            </div>
+            <div class="custom-control custom-switch custom-control-inline">
+              <input type="radio" id="customRadioInline3" name="pago" class="custom-control-input" value="3" required>
+              <label class="custom-control-label" for="customRadioInline3">PayPal</label>
+            </div><br><br>
+            
+                <!------------------------------------------------Tarjeta------------------------------------------------------->
+                
+            <form id="tarjeta" class="needs-validation" novalidate>
+              <div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <div class="input-group-prepend">
+                    <span class="fa fa-lock"></span>
+                  </div>
+                  <label for="validationCustom01">Número de tarjeta</label>
+                  <div class="input-group-prepend">
+                    <span class="fa fa-lock"></span>
+                  </div>
+                  <input type="text" class="form-control" id="nTarjeta" placeholder="Dígitos de la tarjeta (16)" value="" required>
+              </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">Fecha de vencimiento</label>
+                  <input type="text" class="form-control" id="fVencimiento" placeholder="MM/AA" value="" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom02">Código de seguridad</label>
+                  <input type="password" class="form-control" id="cSeguridad" placeholder="CVV" title="3 dígitos" value="" maxlength="3" pattern="[0-9]{3}" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom03">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombre/s" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom04">Apellido</label>
+                  <input type="text" class="form-control" id="apellido" placeholder="Apellido/s" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-block btn-dark">Confirmar Compra</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+                <!-------------------------------------------------------------------------------------------------------------------->  
+                <!-----------------------------------------------------Transferencia-------------------------------------------------->  
+            <form id="transferencia" class="d-none needs-validation" novalidate>
+                <div class="form-row">
+                  <div class= "col-md-4 mb-3">
+                    <img src="img/2765434.png" alt="imagenTransferencia">
+                  </div>
+                  <div class="col-md-8 mb-3">
+                    <br>
+                    <select class="custom-select mr-sm-2" id="nBanco" required>
+                      <option value="1">BROU</option>
+                      <option value="2">Santander</option>
+                      <option value="3">BBVA</option>
+                      <option value="4">Itaú</option>
+                      <option value="5">Scotiabank</option>
+                      <option value="6">HSBC</option>
+                    </select><br><br>
+                    <input type="text" class="form-control" id="nCuenta" placeholder="Número de cuenta" required>  
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="tNombre" placeholder="Nombre/s del titular" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="tApellido" placeholder="Apellido/s del titular" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-block btn-dark">Confirmar Compra</button>
+                  <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                </div>    
+            </form>
+                <!----------------------------------------------------------------------------------------------------->  
+                <!-------------------------------------------PayPal---------------------------------------------------->  
+            <div id="paypal" class="d-none">
+            
+              <img src="img/pp.png" alt="imagenPayPal" style="display:flex;  margin:0 auto;">
+              <h5>Serás redirigido a la pasarela de pago de PayPal</h5>
+
+              <div class="modal-footer">
+                <a type="button" class="btn btn-block btn-info" href="https://www.paypal.com">Continuar</a>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+                <!----------------------------------------------------------------------------------------------------->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----------------------------------------------------------------------------------------------------------------------------------->
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
@@ -219,6 +353,25 @@
       <div></div>
     </div>
   </div>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      let form = document.getElementById('tarjeta');
+
+      form.addEventListener('submit', function (e) {
+        if (form.checkValidity() === false) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      });
+      
+    });
+
+  </script>
+
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
