@@ -181,3 +181,31 @@ a.custom-card:hover {
 .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle {
   border-color: #5dbcd2
 }
+
+.profile {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  margin: auto;
+  background-color:skyblue;
+  border: 1px black solid; 
+}
+
+#imgPerfil, 
+#photo {
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  border-color: white;
+  border-style: solid;
+}
+
+.whiteL {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+

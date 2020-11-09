@@ -65,23 +65,39 @@ function showProductsList(array) {
             //-------------------------------------------------------------------------------------------
             if (buscar == undefined || buscando.toLowerCase().indexOf(buscar) != -1) {
                 //-------------------------------------------------------------------------------------------
-                contenido += `      
-        <a href="product-info.html" class="list-group-item list-group-item-action">
-            <div class="row">
-                <div class="col-3">
-                    <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
+                contenido += `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card my-3">
+                        <a href="product-info.html" class="list-group-item list-group-item-action" style="height:27rem;">
+                            <img src="` + product.imgSrc + `" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">`+ product.name + `</h5>
+                                <p class="card-text"> <small class="text-muted">` + product.cost + ` USD</small> </p>
+                                <p class="card-text">` + product.description + `</p>
+                            </div>
+                        </a>       
+                    </div>    
                 </div>
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">`+ product.name + `</h4>
-                        <small class="text-muted">` + product.cost + ` USD</small>
+                `;
+
+                /*`      
+                <a href="product-info.html" class="list-group-item list-group-item-action">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
+                        </div>
+                        <div class="col">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">`+ product.name + `</h4>
+                                <small class="text-muted">` + product.cost + ` USD</small>
+                            </div>
+                            <p class="mb-1">` + product.description + `</p>
+                        </div>
                     </div>
-                    <p class="mb-1">` + product.description + `</p>
-                </div>
-            </div>
-        </a>
-            ` 
-        }
+                </a>
+                    `*/
+
+            }
 
         }
 
