@@ -3,6 +3,8 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
 
+    alert("¡Hola!, el inicio de sesión es ficticio. A continuación puedes ingresar cualquier mail y password que inventes.");
+
     document.getElementById("submitBtn").addEventListener("click", function (e) {
         let inputEmail = document.getElementById("inputEmail");
         let inputPassword = document.getElementById("inputPassword");
